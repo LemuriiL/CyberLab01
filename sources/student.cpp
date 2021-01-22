@@ -13,7 +13,7 @@ using std::any;
 using std::ostream;
 using std::vector;
 
-void push_student(const json &j, std::vector<student_t> &studentsInfo) {
+void from_json(const json &j, std::vector<student_t> &studentsInfo) {
   for (const auto & i : j) {
     student_t student;
     student.name = get_name(i.at("name"));
@@ -44,7 +44,7 @@ vector<student_t> Brain(const string& way)
     throw std::runtime_error("meta: error count");
   }
   std::vector<student_t> studentsInfo;
-  push_student(data.at("items"), studentsInfo);
+  from_json(data.at("items"), studentsInfo);
   return studentsInfo;
 }
 

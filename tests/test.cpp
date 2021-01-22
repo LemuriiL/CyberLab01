@@ -55,7 +55,7 @@ std::stringstream ss;
   EXPECT_EQ(tabl, ss.str());
 }
 
-TEST(Errors, NonExistingFile) {
+TEST(Errors, NonFindingFile) {
   std::string exception_string;
   try {
     auto students = Brain("non/finding/file.json");
