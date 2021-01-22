@@ -37,11 +37,11 @@ vector<student_t> Brain(const string& way)
   file.close();
 
   if (!data.at("items").is_array()) {
-    throw std::runtime_error("Items most be array type");
+    throw std::runtime_error("Items must be array");
   }
 
   if (data.at("items").size() != data.at("_meta").at("count")) {
-    throw std::runtime_error("meta_: error with count");
+    throw std::runtime_error("meta: error count");
   }
   std::vector<student_t> studentsInfo;
   push_student(data.at("items"), studentsInfo);

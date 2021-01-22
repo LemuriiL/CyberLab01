@@ -6,7 +6,7 @@
 #include <fstream>
 #include <gtest/gtest.h>
 
-TEST(PrintTable, PrintTable) {
+TEST(Table, CheckTable) {
   std::fstream file{"file.json", std::ios::out};
 const char* tabl = R"(|          Name|        Group|          AVG|         Debt|
 _________________________________________________________
@@ -58,14 +58,14 @@ std::stringstream ss;
 TEST(Errors, NonExistingFile) {
   std::string exception_string;
   try {
-    auto students = Brain("non/existing/file.json");
+    auto students = Brain("non/finding/file.json");
   } catch (std::runtime_error &e) {
     exception_string = e.what();
   }
-  EXPECT_EQ(exception_string, "non/existing/file.json unable to open json");
+  EXPECT_EQ(exception_string, "non/finding/file.json unable to open json");
 }
 
-TEST(Errors, ItemsIsNotArray) {
+TEST(Fail, ItemsNotArray) {
   std::fstream file{"file.json", std::ios::out};
   std::string exception_string;
 
@@ -90,10 +90,10 @@ TEST(Errors, ItemsIsNotArray) {
   } catch (std::runtime_error &e) {
     exception_string = e.what();
   }
-  EXPECT_EQ(exception_string, "Items most be array type");
+  EXPECT_EQ(exception_string, "Items must be array");
 }
 
-TEST(Errors, IncorrectMeta) {
+TEST(Fail, BadMeta) {
   std::fstream file{"file.json", std::ios::out};
   std::string exception_string;
 
@@ -135,7 +135,7 @@ TEST(Errors, IncorrectMeta) {
   } catch (std::runtime_error &e) {
     exception_string = e.what();
   }
-  EXPECT_EQ(exception_string, "meta_: error with count");
+  EXPECT_EQ(exception_string, "meta: error count");
 }
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
